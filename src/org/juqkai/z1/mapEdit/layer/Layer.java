@@ -18,7 +18,14 @@ import org.juqkai.z1.mapEdit.tile.format.Format;
  */
 public class Layer implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	//是否显示
 	private boolean visible = true;
+	//字句
+	private String name;
+	//索引
+	private int index;
+	
 	//当前层的元素
 	private List<Tile> tiles = new ArrayList<Tile>();
 	//格式化
@@ -241,5 +248,17 @@ public class Layer implements Serializable{
 	}
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }
