@@ -28,6 +28,7 @@ public class LayerPanel extends JPanel implements Serializable{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		layer.draw((Graphics2D) g);
+		System.out.println(layerEnum);
     }
 	/**
 	 * 删除一个元素

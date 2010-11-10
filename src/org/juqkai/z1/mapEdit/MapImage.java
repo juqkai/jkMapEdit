@@ -18,7 +18,7 @@ public class MapImage implements Serializable{
 	private String relative = "";
 	//完整路径
 	private String path = "";
-	private Image img ;
+	private transient Image img ;
 	
 	public MapImage(String path) throws MapEditException{
 		if(path.indexOf(CurrentMapInfo.resourcePath) < 0){

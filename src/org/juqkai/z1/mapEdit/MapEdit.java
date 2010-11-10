@@ -75,6 +75,12 @@ public class MapEdit {
 //    	mapSave = new WawaDemo1Save();
     	mapSave = new MapSerializable();
     	mapSave.save(saveFile, panels);
+    	
+    }
+    
+    public void load(){
+    	MapSerializable ms = new MapSerializable();
+    	ms.load();
     }
     
 	/**
