@@ -149,7 +149,7 @@ public class MapEdit {
 	 * @return
 	 * @author juqkai(juqkai@gmail.com) 2010-10-13
 	 */
-	public Layer fetchLayerPanel(){
+	public Layer fetchCurrentLayer(){
 		return panels.get(CurrentMapInfo.currentLayer);
 	}
 	public File getSaveFile() {

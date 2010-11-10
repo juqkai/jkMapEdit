@@ -14,8 +14,8 @@ import org.juqkai.z1.mapEdit.EditModel;
 import org.juqkai.z1.mapEdit.MapEdit;
 import org.juqkai.z1.mapEdit.CurrentMapInfo;
 import org.juqkai.z1.mapEdit.MapTree;
-import org.juqkai.z1.mapEdit.MapViewPanel;
 import org.juqkai.z1.mapEdit.layer.LayerEnum;
+import org.juqkai.z1.mapEdit.panel.MapViewPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -116,7 +116,7 @@ public class MapEditView extends FrameView {
 
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mapViewPanel = new org.juqkai.z1.mapEdit.MapViewPanel();
+        mapViewPanel = new org.juqkai.z1.mapEdit.panel.MapViewPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = mapTree.fetchJTree();
         jButton1 = new javax.swing.JButton();

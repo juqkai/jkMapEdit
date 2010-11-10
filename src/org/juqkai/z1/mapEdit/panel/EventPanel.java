@@ -26,9 +26,8 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	private Tile tile;
 	private static final long serialVersionUID = 1L;
 	private MapEdit mapEdit;
-	public EventPanel() {
-		
-	}
+	public EventPanel() {}
+	
 	private void init(){
 		setSize(CurrentMapInfo.fetchWidth(), CurrentMapInfo.fetchHeight());
 		setLocation(0, 0);
@@ -116,7 +115,7 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 * @param e
 	 */
 	private void clear(MouseEvent e) {
-		mapEdit.fetchLayerPanel().remove(e.getX(), e.getY());
+		mapEdit.fetchCurrentLayer().remove(e.getX(), e.getY());
 		repaint();
 	}
 
@@ -125,7 +124,7 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 * @param e
 	 */
 	private void moveItem(MouseEvent e) {
-		mapEdit.fetchLayerPanel().move(e.getX(), e.getY());
+		mapEdit.fetchCurrentLayer().move(e.getX(), e.getY());
 		repaint();
 	}
 
@@ -156,17 +155,16 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 */
 	public void mouseExited(MouseEvent e) {
 		if(CurrentMapInfo.mode == EditModel.MOVE){
-			mapEdit.fetchLayerPanel().releaseSelectTile();
+			mapEdit.fetchCurrentLayer().releaseSelectTile();
 		}
 		tile = null;
-		repaint();
 	}
 	/**
 	 * 按下鼠标
 	 */
 	public void mousePressed(MouseEvent e) {
 		if(CurrentMapInfo.mode == EditModel.MOVE){
-			mapEdit.fetchLayerPanel().selectedTile(e.getX(), e.getY());
+			mapEdit.fetchCurrentLayer().selectedTile(e.getX(), e.getY());
 		}
 	}
 	/**
@@ -174,7 +172,7 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 */
 	public void mouseReleased(MouseEvent e) {
 		if(CurrentMapInfo.mode == EditModel.MOVE){
-			mapEdit.fetchLayerPanel().releaseSelectTile();
+			mapEdit.fetchCurrentLayer().releaseSelectTile();
 		}
 	}
 	public MapEdit getMapEdit() {
