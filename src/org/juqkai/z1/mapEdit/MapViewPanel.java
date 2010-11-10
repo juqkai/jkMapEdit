@@ -33,10 +33,6 @@ public class MapViewPanel extends JPanel{
 	private void initPanel() {
 		setPreferredSize(new Dimension(CurrentMapInfo.fetchWidth(), CurrentMapInfo.fetchHeight()));
 		add(eventPanel);
-		add(mapEdit.fetchPanels().get(LayerEnum.GRID));
-		add(mapEdit.fetchPanels().get(LayerEnum.MOVE));
-		add(mapEdit.fetchPanels().get(LayerEnum.BULIDING));
-		add(mapEdit.fetchPanels().get(LayerEnum.FLOOR));
 		repaint();
 	}
 	/**

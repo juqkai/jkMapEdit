@@ -2,6 +2,7 @@ package org.juqkai.z1.mapEdit.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -44,6 +45,10 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	protected void paintComponent(Graphics g) {
 		//ZKFIXME 这个地方应该有性能问题,后面记得修改
 		super.paintComponent(g);
+		
+		//绘制地图的所有信息
+		mapEdit.draw((Graphics2D) g);
+		
 		if(tile != null && tile.getImg() != null){
 			Format fm = LayerFactory.makeFormat(CurrentMapInfo.currentLayer);
 			Point po = fm.datumOffset(tile);
@@ -111,7 +116,8 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 * @param e
 	 */
 	private void clear(MouseEvent e) {
-		mapEdit.fetchLayerPanel().removeTile(e.getX(), e.getY());
+		mapEdit.fetchLayerPanel().remove(e.getX(), e.getY());
+		repaint();
 	}
 
 	/**
@@ -119,7 +125,8 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 * @param e
 	 */
 	private void moveItem(MouseEvent e) {
-		mapEdit.fetchLayerPanel().moveTile(e.getX(), e.getY());
+		mapEdit.fetchLayerPanel().move(e.getX(), e.getY());
+		repaint();
 	}
 
 	/**
@@ -128,6 +135,7 @@ public class EventPanel extends JPanel implements MouseListener, MouseMotionList
 	 */
 	private void edit(MouseEvent e){
 		mapEdit.addTile(e.getX(), e.getY());
+		repaint();
 	}
 	
 	

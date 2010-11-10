@@ -10,8 +10,8 @@ import java.io.ObjectOutputStream;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.juqkai.z1.mapEdit.layer.Layer;
 import org.juqkai.z1.mapEdit.layer.LayerEnum;
-import org.juqkai.z1.mapEdit.panel.LayerPanel;
 
 /**
  * 地图信息序列化
@@ -33,7 +33,7 @@ public class MapSerializable implements MapSave {
 		}
 	}
 
-	public void save(File file, Map<LayerEnum, LayerPanel> panels) {
+	public void save(File file, Map<LayerEnum, Layer> panels) {
 		try {
 //			for (LayerPanel lp : panels.values()) {
 //				oos.writeObject(lp);
@@ -51,8 +51,8 @@ public class MapSerializable implements MapSave {
 	public void load() {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-			Map<LayerEnum, LayerPanel> panels = (Map<LayerEnum, LayerPanel>) ois.readObject();
-			for(Entry<LayerEnum, LayerPanel> e : panels.entrySet()){
+			Map<LayerEnum, Layer> panels = (Map<LayerEnum, Layer>) ois.readObject();
+			for(Entry<LayerEnum, Layer> e : panels.entrySet()){
 				System.out.println(e.getKey());
 				System.out.println(e.getValue());
 			}

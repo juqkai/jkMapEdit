@@ -18,6 +18,7 @@ import org.juqkai.z1.mapEdit.tile.format.Format;
  */
 public class Layer implements Serializable{
 	private static final long serialVersionUID = 1L;
+	private boolean visible = true;
 	//当前层的元素
 	private List<Tile> tiles = new ArrayList<Tile>();
 	//格式化
@@ -96,6 +97,9 @@ public class Layer implements Serializable{
 	 * @author juqkai(juqkai@gmail.com)
 	 */
 	public void draw(Graphics2D g){
+		if(!visible){
+			return;
+		}
 		for(Tile tile : tiles){
 			if(ZKLang.isNull(tile)){
 				continue;
@@ -231,5 +235,11 @@ public class Layer implements Serializable{
 	}
 	public List<Tile> getTiles() {
 		return tiles;
+	}
+	public boolean isVisible() {
+		return visible;
+	}
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }

@@ -3,7 +3,6 @@ package org.juqkai.z1.mapEdit.layer;
 import org.juqkai.z1.mapEdit.ImageCache;
 import org.juqkai.z1.mapEdit.MapImage;
 import org.juqkai.z1.mapEdit.Tile;
-import org.juqkai.z1.mapEdit.panel.LayerPanel;
 import org.juqkai.z1.mapEdit.tile.format.DefaultFormat;
 import org.juqkai.z1.mapEdit.tile.format.Format;
 import org.juqkai.z1.mapEdit.tile.format.square.SquareCenterFormat;
@@ -60,14 +59,5 @@ public class LayerFactory {
 			break;
 		}
 		return fm;
-	}
-	/**
-	 * 创建层面板
-	 * @param le
-	 * @return
-	 * @author juqkai(juqkai@gmail.com) 2010-9-26
-	 */
-	public static LayerPanel makePanel(LayerEnum le){
-		return new LayerPanel(make(le), le);
 	}
 }

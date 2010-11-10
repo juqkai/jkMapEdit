@@ -5,14 +5,15 @@
 
 package org.juqkai.z1.mapEdit;
 
+import java.awt.Graphics2D;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.juqkai.util.ZKLang;
+import org.juqkai.z1.mapEdit.layer.Layer;
 import org.juqkai.z1.mapEdit.layer.LayerEnum;
 import org.juqkai.z1.mapEdit.layer.LayerFactory;
-import org.juqkai.z1.mapEdit.panel.LayerPanel;
 import org.juqkai.z1.mapEdit.save.MapSave;
 import org.juqkai.z1.mapEdit.save.MapSerializable;
 import org.juqkai.z1.mapEdit.save.WawaDemo1Save;
@@ -23,7 +24,7 @@ import org.juqkai.z1.mapEdit.save.WawaDemo1Save;
  */
 public class MapEdit {
     
-    private Map<LayerEnum, LayerPanel> panels = new HashMap<LayerEnum, LayerPanel>();
+    private Map<LayerEnum, Layer> panels = new HashMap<LayerEnum, Layer>();
     private MapSave mapSave;
     private File saveFile;
 
@@ -43,25 +44,22 @@ public class MapEdit {
      * @author juqkai(juqkai@gmail.com) 2010-9-26
      */
 	private void initPanel() {
-		panels.put(LayerEnum.FLOOR, makePanel(LayerEnum.FLOOR));
-		panels.put(LayerEnum.MOVE, makePanel(LayerEnum.MOVE));
-		panels.put(LayerEnum.BULIDING, makePanel(LayerEnum.BULIDING));
-		panels.put(LayerEnum.GRID, makePanel(LayerEnum.GRID));
+		panels.put(LayerEnum.FLOOR, LayerFactory.make(LayerEnum.FLOOR));
+		panels.put(LayerEnum.MOVE, LayerFactory.make(LayerEnum.MOVE));
+		panels.put(LayerEnum.BULIDING, LayerFactory.make(LayerEnum.BULIDING));
+		panels.put(LayerEnum.GRID, LayerFactory.make(LayerEnum.GRID));
 	}
+	
 	/**
-	 * 创建面板
-	 * @param le
-	 * @return
-	 * @author juqkai(juqkai@gmail.com) 2010-9-26
+	 * 绘制当前地图的信息
+	 * @param g
+	 * @author juqkai(juqkai@gmail.com)
 	 */
-	private LayerPanel makePanel(LayerEnum le){
-		LayerPanel lp = LayerFactory.makePanel(le);
-		lp.setSize(CurrentMapInfo.fetchWidth(), CurrentMapInfo.fetchHeight());
-		lp.setLocation(0, 0);
-		//透明
-		lp.setOpaque(false);
-		return lp;
-	}
+	public void draw(Graphics2D g){
+		for(Layer layer : panels.values()){
+			layer.draw(g);
+		}
+    }
     
     /**
      * 保存
@@ -134,7 +132,7 @@ public class MapEdit {
 //			return true;
 //		return false;
 	}
-	public Map<LayerEnum, LayerPanel> fetchPanels(){
+	public Map<LayerEnum, Layer> fetchPanels(){
 		return panels;
 	}
 	/**
@@ -151,7 +149,7 @@ public class MapEdit {
 	 * @return
 	 * @author juqkai(juqkai@gmail.com) 2010-10-13
 	 */
-	public LayerPanel fetchLayerPanel(){
+	public Layer fetchLayerPanel(){
 		return panels.get(CurrentMapInfo.currentLayer);
 	}
 	public File getSaveFile() {

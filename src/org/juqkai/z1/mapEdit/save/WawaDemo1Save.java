@@ -12,12 +12,11 @@ import org.juqkai.z1.mapEdit.CurrentMapInfo;
 import org.juqkai.z1.mapEdit.Tile;
 import org.juqkai.z1.mapEdit.layer.Layer;
 import org.juqkai.z1.mapEdit.layer.LayerEnum;
-import org.juqkai.z1.mapEdit.panel.LayerPanel;
 
 public class WawaDemo1Save implements MapSave{
 	private FileWriter fw;
 
-	public void save(File file, Map<LayerEnum, LayerPanel> panels) {
+	public void save(File file, Map<LayerEnum, Layer> panels) {
 		try {
 			fw = new FileWriter(file);
 		} catch (IOException e1) {
@@ -45,7 +44,7 @@ public class WawaDemo1Save implements MapSave{
 	 * @author juqkai(juqkai@gmail.com) 2010-9-27
 	 * @throws IOException 
 	 */
-	private void floorData(Map<LayerEnum, LayerPanel> panels) throws IOException{
+	private void floorData(Map<LayerEnum, Layer> panels) throws IOException{
 		StringBuilder sb = new StringBuilder();
 		sb.append("private var bg1:Array=[");
 		sb.append("\n");
@@ -60,7 +59,7 @@ public class WawaDemo1Save implements MapSave{
 	 * @throws IOException
 	 * @author juqkai(juqkai@gmail.com) 2010-9-28
 	 */
-	private void buildingData(Map<LayerEnum, LayerPanel> panels) throws IOException{
+	private void buildingData(Map<LayerEnum, Layer> panels) throws IOException{
 		StringBuilder sb = new StringBuilder();
 		sb.append("private var front1:Array=[");
 		sb.append("\n");
@@ -93,13 +92,13 @@ public class WawaDemo1Save implements MapSave{
 		sb.append("");
 		fw.write(sb.toString());
 	}
-	private String fetchJsons(LayerPanel lp){
-		if(lp == null || lp.getLayer() == null){
+	private String fetchJsons(Layer lp){
+		if(lp == null){
 			return "";
 		}
 		StringBuilder sb = new StringBuilder();
 		boolean  i = false;
-		for(Tile t : lp.getLayer().getTiles()){
+		for(Tile t : lp.getTiles()){
 			if(t == null || t.getMapImage() == null){
 				continue;
 			}
@@ -119,9 +118,8 @@ public class WawaDemo1Save implements MapSave{
 	 * @throws IOException
 	 * @author juqkai(juqkai@gmail.com) 2010-9-28
 	 */
-	private void writeMap(Map<LayerEnum, LayerPanel> panels) throws IOException{
-		LayerPanel lp = panels.get(LayerEnum.MOVE);
-		List<Tile> ts = lp.getLayer().getTiles();
+	private void writeMap(Map<LayerEnum, Layer> panels) throws IOException{
+		List<Tile> ts = panels.get(LayerEnum.MOVE).getTiles();
 		
 		StringBuilder sb = new StringBuilder();
 		int t = 0;
@@ -155,9 +153,8 @@ public class WawaDemo1Save implements MapSave{
 	 * @throws IOException
 	 * @author juqkai(juqkai@gmail.com) 2010-9-28
 	 */
-	private void writeMove(Map<LayerEnum, LayerPanel> panels) throws IOException{
-		LayerPanel lp = panels.get(LayerEnum.MOVE);
-		List<Tile> ts = lp.getLayer().getTiles();
+	private void writeMove(Map<LayerEnum, Layer> panels) throws IOException{
+		List<Tile> ts = panels.get(LayerEnum.MOVE).getTiles();
 		
 		StringBuilder sb = new StringBuilder();
 		int t = 0;
@@ -219,11 +216,10 @@ public class WawaDemo1Save implements MapSave{
 	 * @author juqkai(juqkai@gmail.com) 2010-9-27
 	 * @throws IOException 
 	 */
-	private void makeVar(Map<LayerEnum, LayerPanel> panels) throws IOException{
+	private void makeVar(Map<LayerEnum, Layer> panels) throws IOException{
 		Set<String> imgs = new HashSet<String>();
 		StringBuilder sb = new StringBuilder();
-		for(LayerPanel lp : panels.values()){
-			Layer layer = lp.getLayer();
+		for(Layer layer : panels.values()){
 			for(Tile tile : layer.getTiles()){
 				if(tile != null && tile.getMapImage() != null){
 					imgs.add(tile.getMapImage().getRelative());
